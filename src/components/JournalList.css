@@ -1,0 +1,320 @@
+.journal-list-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.journal-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.journal-list-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b6b, #ff9e7d);
+  border-radius: 3px;
+}
+
+.journal-list-header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state p {
+  color: #a0a0a0;
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 300;
+}
+
+.empty-state p:first-child {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #888;
+}
+
+.journals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.journal-card {
+  background: linear-gradient(145deg, rgba(30, 30, 40, 0.8), rgba(25, 25, 35, 0.8));
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.journal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+}
+
+.journal-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at top right, rgba(110, 142, 251, 0.1), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.journal-card:hover {
+  transform: translateY(-5px) rotateX(2deg);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  border-color: rgba(167, 119, 227, 0.3);
+}
+
+.journal-card:hover::after {
+  opacity: 1;
+}
+
+.journal-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: #e0e0e0;
+  display: flex;
+  align-items: center;
+}
+
+.journal-card h4::before {
+  content: '📅';
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.journal-card p {
+  color: #b0b0b0;
+  line-height: 1.6;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.journal-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.journal-mood {
+  font-size: 1.2rem;
+}
+
+.journal-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.journal-actions button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #a0a0a0;
+}
+
+.journal-actions button:hover {
+  background: rgba(110, 142, 251, 0.2);
+  color: #6e8efb;
+  transform: scale(1.1);
+}
+
+/* List view variant */
+.journals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.journals-list .journal-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.journals-list .journal-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.journals-list .journal-card h4 {
+  margin: 0;
+}
+
+/* Loading animation */
+.journal-card.loading {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* Filter and search section */
+.journal-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 0.9rem;
+}
+
+.search-box::before {
+  content: '🔍';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a0a0a0;
+}
+
+.filter-select {
+  padding: 0.75rem 1rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 0.9rem;
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  background-size: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .journal-list-container {
+    padding: 1rem;
+  }
+  
+  .journals-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .journal-controls {
+    flex-direction: column;
+  }
+  
+  .search-box {
+    min-width: 100%;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .journal-card {
+    background: linear-gradient(145deg, rgba(30, 30, 40, 0.9), rgba(25, 25, 35, 0.9));
+  }
+}
+
+/* Animation for new items */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.journal-card {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Custom scrollbar for journal content */
+.journal-card p::-webkit-scrollbar {
+  width: 4px;
+}
+
+.journal-card p::-webkit-scrollbar-thumb {
+  background: rgba(110, 142, 251, 0.5);
+  border-radius: 4px;
+}
+
+.journal-card p::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
